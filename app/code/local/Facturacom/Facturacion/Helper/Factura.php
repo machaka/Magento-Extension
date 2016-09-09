@@ -6,6 +6,7 @@
  * – getOrderFromLocal
  * – saveLocalOrder
  * – getCustomerByRFC
+ * – getAccountDetails
  * – createCustomer
  * – createInvoice
  * – setCookie
@@ -62,6 +63,19 @@ class Facturacom_Facturacion_Helper_Factura extends Mage_Core_Helper_Abstract
      */
     public function getCustomerByRFC($customerRfc){
         $apimethod = 'clients/' . $customerRfc;
+        $request = 'GET';
+
+        return $this->apiCall($apimethod, $request);
+    }
+
+    /*
+	 * Create invoice in factura.com system
+	 *
+	 * @return Object
+	 *
+	 */
+    public function getAccountDetails(){
+        $apimethod = 'current/account';
         $request = 'GET';
 
         return $this->apiCall($apimethod, $request);

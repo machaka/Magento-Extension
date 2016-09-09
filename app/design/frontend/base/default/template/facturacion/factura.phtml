@@ -1,3 +1,11 @@
+<?php
+/**
+ * Factura.com invoicing widget
+ */
+
+$facturacom = Mage::helper('facturacom_facturacion/factura');
+$account = $facturacom->getAccountDetails();
+?>
 <div id="facturacion_wrapper">
     <input type="hidden" id="siteurl" value="<?php echo Mage::getBaseUrl() ?>">
     <div class="full-width">
@@ -161,13 +169,12 @@
 
                                 <div class="invoice-emisor">
                                   <h3 class="invoice-header">Emisor</h3>
-                                  <span id="emisor-nombre" class="ref-data"></span>
-                                  <span id="emisor-rfc" class="ref-data"></span>
-                                  <span id="emisor-direccion" class="ref-data"></span>
-                                  <span id="emisor-direccion-zone" class="ref-data"></span>
-                                  <span id="emisor-direccion-zone-city" class="ref-data"></span>
-                                  <span id="emisor-telefono" class="ref-data"></span>
-                                  <span id="emisor-email" class="ref-data"></span>
+                                  <span id="emisor-nombre" class="ref-data"><?php echo $account->data->razon_social ?></span>
+                                  <span id="emisor-rfc" class="ref-data"><?php echo $account->data->rfc ?></span>
+                                  <span id="emisor-direccion" class="ref-data"><?php echo $account->data->calle . ' ' . $account->data->exterior . ' ' . $account->data->interior ?></span>
+                                  <span id="emisor-direccion-zone" class="ref-data"><?php echo $account->data->colonia . ' ' . $account->data->codpos ?></span>
+                                  <span id="emisor-direccion-zone-city" class="ref-data"><?php echo $account->data->ciudad . ' ' . $account->data->estado ?></span>
+                                  <span id="emisor-email" class="ref-data"><?php echo $account->data->email ?></span>
                                 </div>
 
                                 <div class="invoice-receptor">

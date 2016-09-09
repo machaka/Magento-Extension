@@ -72,11 +72,11 @@ jQuery(document).ready( function($) {
         //$('#receptor-email').text(invoice_data.Data.Contacto.Email);
 
         //emisor
-        $('#emisor-nombre').text("UNMANNED SYSTEMS S A P I DE CV");
-        $('#emisor-rfc').text("USY141002JX2");
-        $('#emisor-direccion').text("López Mateos 400 Int: Piso 8");
-        $('#emisor-direccion-zone').text("Ladrón de Guevara. CP: 44650");
-        $('#emisor-direccion-zone-city').text("Guadalajara, Jalisco, México.");
+        // $('#emisor-nombre').text("UNMANNED SYSTEMS S A P I DE CV");
+        // $('#emisor-rfc').text("USY141002JX2");
+        // $('#emisor-direccion').text("López Mateos 400 Int: Piso 8");
+        // $('#emisor-direccion-zone').text("Ladrón de Guevara. CP: 44650");
+        // $('#emisor-direccion-zone-city').text("Guadalajara, Jalisco, México.");
 
         //taxes
         calculate_tax = 0.16;
@@ -99,7 +99,7 @@ jQuery(document).ready( function($) {
             // unit_price = products[key]['price'] - Number(products[key]['price'] * calculate_tax);
 
             unit_subtotal = products[key]['qty'] * unit_price;
-            console.log(unit_price);
+
             r[++j] ='<tr><td>';
             r[++j] = products[key]['name'];
             r[++j] = '</td><td>';
@@ -132,7 +132,7 @@ jQuery(document).ready( function($) {
           total_iva = Number((subtotal-discount) - pre_total);
           total = Math.round(pre_total + total_iva);
 
-          console.log("pre_total: " + pre_total);
+
 
           $('#td-discount #invoice-discount').text('$'+discount.formatMoney(2, '.', ','));
           $('#td-discount').css({'display':'table-row'});
@@ -257,12 +257,6 @@ jQuery(document).ready( function($) {
           rfc_item.addClass("input_error");
           return false;
         }
-
-        /*
-        console.log(rfc_item.val().length > 0);
-        console.log(order_item.val().length > 0);
-        console.log(email_item.val().length > 0);
-        */
 
         if( rfc_item.val().length > 0 && order_item.val().length > 0 && email_item.val().length > 0 ){
           rfc_item.removeClass("input_error");
