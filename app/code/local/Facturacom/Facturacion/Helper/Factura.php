@@ -137,14 +137,19 @@ class Facturacom_Facturacion_Helper_Factura extends Mage_Core_Helper_Abstract
 
         $items = array();
         $discount = 0;
+        $calculate_tax = 1.16;
 
         foreach($products as $product):
             $unidad = "Producto"; //o producto o servicio (TG no devuelve esto)
-
-            $product_price = ($product->price/$product->qty) / 1.16;
-            $discount += $product->discount;
-
             $ivaconfig = $product->ivaconfig;
+
+            if($ivaconfig == 0){
+                $calculate_tax = 1;
+            }
+
+
+            $product_price = ($product->price/$product->qty) / $calculate_tax;
+            $discount += $product->discount;
 
             $ivaconcept = ($ivaconfig == 1) ? "yes" : "no";
 
