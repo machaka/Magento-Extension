@@ -103,21 +103,7 @@ class Facturacom_Facturacion_IndexController extends Mage_Core_Controller_Front_
 
              $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($response));
          }else{
-             //test - borrar
-             $facturahelper = Mage::helper('facturacom_facturacion/factura');
-             $orderhelper   = Mage::helper('facturacom_facturacion/order');
-
-             $order = $orderhelper->getOrderByNum('100000210');
-            //  $customer  = $facturahelper->getCustomerByRFC('SOOP900901770');
-             //
-             $orderEntity = $orderhelper->getOrderEntity('100000210');
-             $line_items = $orderhelper->getOrderLines($orderEntity);
-            //  $order_cookie = $facturacom->getCookies();
-
-             echo "<pre>";
-             var_dump($order);
-             var_dump($line_items);
-             echo "</pre>";
+             die('AJAX request only');
          }
      }
 
@@ -185,7 +171,7 @@ class Facturacom_Facturacion_IndexController extends Mage_Core_Controller_Front_
             $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($response));
 
         }else{
-            die('NOT');
+            die('AJAX request only');
         }
     }
 
@@ -220,16 +206,7 @@ class Facturacom_Facturacion_IndexController extends Mage_Core_Controller_Front_
 
             $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($response));
         }else{
-
-            $facturacom = Mage::helper('facturacion/factura');
-
-            // $invoice = $facturacom->createInvoice();
-
-            // echo "<pre>";
-            // var_dump($invoice);
-            // echo "</pre>";
-
-            die('NOT 3');
+            die('AJAX request only');
         }
     }
 

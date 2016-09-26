@@ -152,6 +152,15 @@ class Facturacom_Facturacion_Block_Adminhtml_Invoices_Edit_Form extends Mage_Adm
             'after_element_html' => '<p class="nm"><small>' . ' Color de letra del header del widget que se mostrará en el área de clientes (Ejemplo: #393318)' . '</small></p>',
         ));
 
+        $fieldset->addField('ivaconfig', 'checkbox', array(
+            'name'  => 'ivaconfig',
+            'label' => Mage::helper('checkout')->__('Mis precios manejan IVA'),
+            'onclick' => 'this.value = this.checked ? 1 : 0;',
+            'checked' => $model->getIvaconfig(),
+            'required' => false,
+            'after_element_html' => '<p class="nm"><small>Marque esta opción si los precios no incluyen IVA pero manejan el configurado en el sistema.</small></p>',
+        ));
+
         $form->setValues($model->getData());
         $form->setUseContainer(true);
 

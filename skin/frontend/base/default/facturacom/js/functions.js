@@ -59,7 +59,6 @@ jQuery(document).ready( function($) {
 
     /* Validate forms */
     function fillInvoiceContainer(order_data, customer_data, products){
-
         $('#invoice-id').hide();
         $('#invoice-date').hide();
         //receptor
@@ -69,14 +68,6 @@ jQuery(document).ready( function($) {
         $('#receptor-direccion-zone').text(customer_data.Colonia + '. CP: ' + customer_data.CodigoPostal);
         $('#receptor-direccion-zone-city').text(customer_data.Ciudad + ', ' + customer_data.Estado
                 + ', México.');
-        //$('#receptor-email').text(invoice_data.Data.Contacto.Email);
-
-        //emisor
-        // $('#emisor-nombre').text("UNMANNED SYSTEMS S A P I DE CV");
-        // $('#emisor-rfc').text("USY141002JX2");
-        // $('#emisor-direccion').text("López Mateos 400 Int: Piso 8");
-        // $('#emisor-direccion-zone').text("Ladrón de Guevara. CP: 44650");
-        // $('#emisor-direccion-zone-city').text("Guadalajara, Jalisco, México.");
 
         //taxes
         calculate_tax = 0.16;
@@ -89,6 +80,11 @@ jQuery(document).ready( function($) {
 
         var r = new Array(), j = -1;
         for (var key=0, size=products.length; key<size; key++){
+
+            ivaconfig = products[key]['ivaconfig'];
+            if(ivaconfig == 0){
+                tax = 1;
+            }
 
             // if(discount <= 0){
             //   unit_price = Number(products[key]['price']) / tax;

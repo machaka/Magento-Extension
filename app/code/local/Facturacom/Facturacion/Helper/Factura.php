@@ -134,7 +134,6 @@ class Facturacom_Facturacion_Helper_Factura extends Mage_Core_Helper_Abstract
         $order = json_decode($this->getCookie('order'));
         $products = json_decode($this->getCookie('line_items'));
         $customer = json_decode($this->getCookie('customer'));
-        // return $order;
 
         $items = array();
         $discount = 0;
@@ -145,11 +144,16 @@ class Facturacom_Facturacion_Helper_Factura extends Mage_Core_Helper_Abstract
             $product_price = ($product->price/$product->qty) / 1.16;
             $discount += $product->discount;
 
+            $ivaconfig = $product->ivaconfig;
+
+            $ivaconcept = ($ivaconfig == 1) ? "yes" : "no";
+
             $product_data = array(
                 'cantidad'  => $product->qty,
                 'unidad'    => $unidad,
                 'concept'   => $product->name,
                 'precio'    => $product_price,
+                'ivaconcept' => $ivaconcept,
                 'subtotal'  => $product_price * $product->qty,
             );
 

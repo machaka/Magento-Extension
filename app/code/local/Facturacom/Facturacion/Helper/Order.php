@@ -66,16 +66,21 @@ class Facturacom_Facturacion_Helper_Order extends Mage_Core_Helper_Abstract
                             ->addAttributeToFilter('product_type', array('eq'=>'simple'))
                             ->load();
 
+        $model = Mage::getModel('facturacom_facturacion/conf')->load(1);
+        $ivaconfig = $model->getIvaconfig();
+
         foreach ($order_items_collection as $order_item) {
 
             $item = Mage::getModel('sales/order_item')->load($order_item->getId())->getData();
             // echo "<pre>";
             // var_dump($item);die;
+
             $line_row = array(
                 'id'        => $item['item_id'],
                 'name'      => $item['name'],
                 'qty'       => $item['qty_ordered'],
                 'price'     => $item['price'] + $item['tax_amount'],
+                'ivaconfig' => $ivaconfig,
                 'discount'  => abs($item['discount_amount']),
             );
             array_push($line_items, $line_row);
@@ -88,6 +93,7 @@ class Facturacom_Facturacion_Helper_Order extends Mage_Core_Helper_Abstract
                 'name'  => $orderData['shipping_description'],
                 'qty'   => 1,
                 'price' => $orderData['shipping_amount'] + $orderData['shipping_tax_amount'],
+                'ivaconfig' => $ivaconfig,
                 'discount' => 0
             );
             array_push($line_items, $shipping);

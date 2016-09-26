@@ -88,6 +88,7 @@ class Facturacom_Facturacion_Adminhtml_InvoicesController extends Mage_Adminhtml
         $this->_title($model->getId() ? $model->getOrderId() : $this->__('New Invoice'));
 
         $data = Mage::getSingleton('adminhtml/session')->getOrderData(true);
+
         if(!empty($data)){
             $model->setData($data);
         }
@@ -108,6 +109,8 @@ class Facturacom_Facturacion_Adminhtml_InvoicesController extends Mage_Adminhtml
             // Save data in database
             $model = Mage::getSingleton('facturacom_facturacion/conf');
 
+            $ivaconfig = (isset($postData['ivaconfig'])) ? $postData['ivaconfig'] : 0;
+
             $configData = array(
                 'form_key'          => $postData['form_key'],
                 'id'                => $postData['id'],
@@ -116,12 +119,13 @@ class Facturacom_Facturacion_Adminhtml_InvoicesController extends Mage_Adminhtml
                 'serie'             => $postData['serie'],
                 'dayoff'            => $postData['dayoff'],
                 'activatedate'      => $postData['activatedate'],
-                'version'           => '1.0.0',
+                'version'           => '1.1.0',
                 'systemurl'         => Mage::getBaseUrl(),
                 'widgetheadtitle'   => $postData['widgetheadtitle'],
                 'widgetdescription' => $postData['widgetdescription'],
                 'widgetheadbg'      => $postData['widgetheadbg'],
                 'widgetheadfcolor'  => $postData['widgetheadfcolor'],
+                'ivaconfig'         => $ivaconfig,
             );
 
             $model->setData($configData);
