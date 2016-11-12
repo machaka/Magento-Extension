@@ -67,6 +67,10 @@ class Facturacom_Facturacion_Block_Adminhtml_Invoices_Grid extends Mage_Adminhtm
         return parent::_prepareColumns();
     }
 
+    public function getGridUrl(){
+        return $this->getUrl('*/*/grid', array('_current'=>true));
+    }
+
     /**
      * This is where our row data will link to
      *

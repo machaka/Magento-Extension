@@ -29,6 +29,7 @@ $installer->run("
         `serie` varchar(255) DEFAULT NULL,
         `dayoff` int(11) DEFAULT NULL,
         `activatedate` datetime DEFAULT NULL,
+        `ivaconfig` INT DEFAULT NULL,
         `apiurl` varchar(255) DEFAULT NULL,
         `version` varchar(255) DEFAULT NULL,
         `systemurl` varchar(255) DEFAULT NULL,

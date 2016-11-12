@@ -23,21 +23,18 @@ class Facturacom_Facturacion_Adminhtml_InvoicesController extends Mage_Adminhtml
     public function configAction(){
         $this->_initAction();
 
-        //Get id if available
-        $id = 1;
         $model = Mage::getModel('facturacom_facturacion/conf');
 
-        if($id){
-            //Load record
-            $model->load($id);
+        //Load record
+        $collectionConfig = current($model->getCollection()->getData());
+        $model->load($collectionConfig['id']);
 
-            //Check if record is loaded
-            if(!$model->getId()){
-                Mage::getSingleton('adminhtml/session')->addError($this->__('This invoice no longer exists.'));
-                $this->_redirect('*/*/');
+        //Check if record is loaded
+        if(!$model->getId()){
+            Mage::getSingleton('adminhtml/session')->addError($this->__('This invoice no longer exists.'));
+            $this->_redirect('*/*/');
 
-                return;
-            }
+            return;
         }
 
         $this->_title($model->getId() ? $model->getFile() : $this->__('New invoice'));
@@ -153,10 +150,9 @@ class Facturacom_Facturacion_Adminhtml_InvoicesController extends Mage_Adminhtml
     public function gridAction(){
         $this->loadLayout();
         $this->getResponse()->setBody(
-            $this->getLayout()->createBlock('facturacom_facturacion/adminhtml_invoices_customer')->toHtml()
+            $this->getLayout()->createBlock('facturacom_facturacion/adminhtml_invoices_grid')->toHtml()
         );
     }
-
 
     public function downloadAction(){
         $id = $this->getRequest()->getParam('id');
