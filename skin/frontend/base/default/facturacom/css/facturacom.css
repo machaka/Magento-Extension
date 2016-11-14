@@ -335,7 +335,7 @@ html.remodal-is-locked {
 
 #facturacion_wrapper .steps-container {
     display: block;
-    padding: 10%;
+    padding: 15%;
     position: relative
 }
 
@@ -493,25 +493,25 @@ html.remodal-is-locked {
 
 .step-block .step-content form .f-input {
     display: block;
-    width: 400px;
+    width: 227px;
     margin: 8px auto;
     border-radius: 5px;
     border: 1px solid #c2c2c2;
-    padding: 10px 10px 10px 170px;
+    padding: 10px 10px 10px 160px;
     color: #4C637B;
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
-    height: 43px;
+    height: 15px;
     position: relative;
 }
 
 #f-step-one-form label,
 #f-step-two-form label,
 #payment-method-form label {
-    width: 160px;
+    width: 130px;
     position: absolute;
-    padding: 11px;
-    height: 43px;
+    padding: 10px;
+    height: 15px;
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     border: 1px solid #c2c2c2;
@@ -563,13 +563,14 @@ html.remodal-is-locked {
     width: 49%;
     display: inline-block;
     margin: 0;
-    vertical-align: top
+    vertical-align: top;
 }
 
 #f-step-two-form .input-group {
     display: table;
     width: 100%;
-    margin: 8px auto
+    margin: 8px auto;
+    position: relative;
 }
 
 #f-step-two-form .input-group .f-input {
@@ -582,13 +583,20 @@ html.remodal-is-locked {
 
 #f-step-two-form label {
     width: 180px;
-    height: 43px
+    height: 15px;
 }
 
 #f-step-two-form .f-input {
     border-color: #c2c2c2;
-    width: 100%;
-    padding-left: 190px
+    width: 341px;
+    padding-left: 210px;
+}
+#f-step-two-form .input-group.float-left label{
+    width: 110px;
+}
+#f-step-two-form .input-group.float-left .f-input{
+    width: 123px;
+    padding-left: 140px;
 }
 
 #f-step-two-form .f-input:read-only {
@@ -811,6 +819,27 @@ html.remodal-is-locked {
     font-weight: 700;
     text-transform: uppercase;
     color: #000;
+}
+
+.invoice-payment #payment-method-form #invoice-pmethod{
+
+}
+.invoice-payment #payment-method-form .input-group{
+    position: relative;
+}
+.invoice-payment #payment-method-form .f-select {
+    background: #FFF;
+    cursor: pointer;
+    margin: 0 0 0 151px;
+    padding: 0;
+    border-radius: 0;
+    height: 37px;
+}
+.invoice-payment #payment-method-form .f-digits{
+    padding-left: 15px;
+    width: 75px;
+    right: -70px;
+    border-radius: 0 5px 5px 0;
 }
 
 .invoice-totals {

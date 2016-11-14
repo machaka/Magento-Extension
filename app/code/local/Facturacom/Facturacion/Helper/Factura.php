@@ -16,7 +16,7 @@
  */
 class Facturacom_Facturacion_Helper_Factura extends Mage_Core_Helper_Abstract
 {
-    private $apiUrl       = 'http://devfactura.in/api/v1/';
+    private $apiUrl       = 'https://factura.com/api/v1/';
 
     /**
      * Getting order by Order Num. from Database
