@@ -66,24 +66,33 @@ class Facturacom_Facturacion_Helper_Order extends Mage_Core_Helper_Abstract
                             ->addAttributeToFilter('product_type', array('eq'=>'simple'))
                             ->load();
 
-        $model = Mage::getModel('facturacom_facturacion/conf')->load(1);
+        //Load record
+        $model = Mage::getModel('facturacom_facturacion/conf');
+        $collectionConfig = current($model->getCollection()->getData());
+        $model->load($collectionConfig['id']);
         $ivaconfig = $model->getIvaconfig();
+        $ivaconfig = 1; //$model->getIvaconfig();
 
         foreach ($order_items_collection as $order_item) {
 
             $item = Mage::getModel('sales/order_item')->load($order_item->getId())->getData();
-            // echo "<pre>";
-            // var_dump($item);die;
+            $itemId = $item['item_id'];
 
-            $line_row = array(
-                'id'        => $item['item_id'],
-                'name'      => $item['name'],
-                'qty'       => $item['qty_ordered'],
-                'price'     => $item['price'] + $item['tax_amount'],
-                'ivaconfig' => $ivaconfig,
-                'discount'  => abs($item['discount_amount']),
-            );
-            array_push($line_items, $line_row);
+            if($item['parent_item_id']){
+                $line_items[$item['parent_item_id']]['name'] = $item['name'];
+            }else{
+                $item_iva = $item['price'] * 0.16;
+
+                $line_row = array(
+                    'id'        => $item['item_id'],
+                    'name'      => $item['name'],
+                    'qty'       => $item['qty_ordered'],
+                    'price'     => $item['price'] + $item_iva, // + $item['discount_amount'],
+                    'ivaconfig' => $ivaconfig,
+                    'discount'  => abs($item['discount_amount']),
+                );
+                $line_items[$itemId] = $line_row;
+            }
         }
 
         $orderData = $order->getData();
@@ -98,7 +107,11 @@ class Facturacom_Facturacion_Helper_Order extends Mage_Core_Helper_Abstract
             );
             array_push($line_items, $shipping);
         }
-        return $line_items;
+        $clean_collaction = array();
+        foreach ($line_items as $item) {
+            array_push($clean_collaction, $item);
+        }
+        return $clean_collaction;
     }
 
 

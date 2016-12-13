@@ -124,11 +124,13 @@ jQuery(document).ready( function($) {
         // }
 
         if(discount > 0){
-          pre_total = Number((subtotal-discount)/tax);
-          total_iva = Number((subtotal-discount) - pre_total);
-          total = Math.round(pre_total + total_iva);
+        //   pre_total = Number((subtotal-discount)/tax);
+        //   total_iva = Number((subtotal-discount) - pre_total);
+        //   total = Math.round(pre_total + total_iva);
 
-
+          pre_subtotal = Number(subtotal - discount);
+          total_iva = Number(pre_subtotal*calculate_tax);
+          total = Number(pre_subtotal+total_iva);
 
           $('#td-discount #invoice-discount').text('$'+discount.formatMoney(2, '.', ','));
           $('#td-discount').css({'display':'table-row'});
