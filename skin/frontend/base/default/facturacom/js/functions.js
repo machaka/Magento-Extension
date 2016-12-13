@@ -91,7 +91,8 @@ jQuery(document).ready( function($) {
             // }else{
             //   unit_price = Number(products[key]['subtotal'])/Number(products[key]['qty']);
             // }
-            unit_price = Number(products[key]['price'] / tax);
+            pre_unit_price = Number(products[key]['price']/products[key]['qty']);
+            unit_price = Number(pre_unit_price / tax);
             // unit_price = products[key]['price'] - Number(products[key]['price'] * calculate_tax);
 
             unit_subtotal = products[key]['qty'] * unit_price;

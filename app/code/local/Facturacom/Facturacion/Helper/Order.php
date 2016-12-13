@@ -71,7 +71,7 @@ class Facturacom_Facturacion_Helper_Order extends Mage_Core_Helper_Abstract
         $collectionConfig = current($model->getCollection()->getData());
         $model->load($collectionConfig['id']);
         $ivaconfig = $model->getIvaconfig();
-        $ivaconfig = 1; //$model->getIvaconfig();
+        $ivaconfig = 1;
 
         foreach ($order_items_collection as $order_item) {
 
@@ -82,12 +82,13 @@ class Facturacom_Facturacion_Helper_Order extends Mage_Core_Helper_Abstract
                 $line_items[$item['parent_item_id']]['name'] = $item['name'];
             }else{
                 $item_iva = $item['price'] * 0.16;
+                $item_price = ($item['price'] + $item_iva) * $item['qty_ordered'];
 
                 $line_row = array(
                     'id'        => $item['item_id'],
                     'name'      => $item['name'],
                     'qty'       => $item['qty_ordered'],
-                    'price'     => $item['price'] + $item_iva, // + $item['discount_amount'],
+                    'price'     => $item_price,
                     'ivaconfig' => $ivaconfig,
                     'discount'  => abs($item['discount_amount']),
                 );
