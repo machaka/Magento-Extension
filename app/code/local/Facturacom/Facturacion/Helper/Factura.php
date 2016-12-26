@@ -16,7 +16,7 @@
  */
 class Facturacom_Facturacion_Helper_Factura extends Mage_Core_Helper_Abstract
 {
-    private $apiUrl       = 'https://factura.com/api/v1/';
+    private $apiUrl       = 'http://devfactura.in/api/v1/';
 
     /**
      * Getting order by Order Num. from Database
@@ -147,7 +147,6 @@ class Facturacom_Facturacion_Helper_Factura extends Mage_Core_Helper_Abstract
                 $calculate_tax = 1;
             }
 
-
             $product_price = ($product->price/$product->qty) / $calculate_tax;
             $discount += $product->discount;
 
@@ -187,6 +186,10 @@ class Facturacom_Facturacion_Helper_Factura extends Mage_Core_Helper_Abstract
                 break;
         }
 
+        //Getting configuration
+        $conf = (object) current(Mage::getModel('facturacom_facturacion/conf')->getCollection()->getData());
+        $serie = $conf->serie;
+
         $params = array(
             'rfc' => $customer->Data->RFC,
             'items' => $items,
@@ -196,7 +199,7 @@ class Facturacom_Facturacion_Helper_Factura extends Mage_Core_Helper_Abstract
             'currencie' => 'MXN',
             'iva' => 1,
             'num_order' => $order->order_number,
-            'seriefactura' => 'F',
+            'seriefactura' => $serie,
             // 'save' => true,
             'descuento' => abs($order->total_discount), //$discount - ($discount * 0.16),//sacar descuentos totales
             'send_email' => true,

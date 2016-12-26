@@ -71,7 +71,6 @@ class Facturacom_Facturacion_Helper_Order extends Mage_Core_Helper_Abstract
         $collectionConfig = current($model->getCollection()->getData());
         $model->load($collectionConfig['id']);
         $ivaconfig = $model->getIvaconfig();
-        $ivaconfig = 1;
 
         foreach ($order_items_collection as $order_item) {
 
@@ -81,19 +80,25 @@ class Facturacom_Facturacion_Helper_Order extends Mage_Core_Helper_Abstract
             if($item['parent_item_id']){
                 $line_items[$item['parent_item_id']]['name'] = $item['name'];
             }else{
-                $item_iva = $item['price'] * 0.16;
+                if($ivaconfig){
+                    $item_iva = 0;
+                }else{
+                    $item_iva = $item['price'] * 0.16;
+                }
+
                 $item_price = ($item['price'] + $item_iva) * $item['qty_ordered'];
 
                 $line_row = array(
                     'id'        => $item['item_id'],
                     'name'      => $item['name'],
                     'qty'       => $item['qty_ordered'],
-                    'price'     => $item_price,
+                    'price'     => $item_price, //$item['price'] + $item_iva, // + $item['discount_amount'],
                     'ivaconfig' => $ivaconfig,
                     'discount'  => abs($item['discount_amount']),
                 );
                 $line_items[$itemId] = $line_row;
             }
+            // array_push($line_items, $line_row);
         }
 
         $orderData = $order->getData();
@@ -108,6 +113,7 @@ class Facturacom_Facturacion_Helper_Order extends Mage_Core_Helper_Abstract
             );
             array_push($line_items, $shipping);
         }
+
         $clean_collaction = array();
         foreach ($line_items as $item) {
             array_push($clean_collaction, $item);
